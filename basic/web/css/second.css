@@ -1,0 +1,30 @@
+table,td,th,tr {
+	border: 2px solid black;
+		text-align: center;
+ padding: 5px;
+}
+.center
+{
+	display: flex;
+	justify-content: center;
+}
+.c
+{
+	font-size: 110px;
+}
+.b
+{
+	font-weight: normal;
+	font-size: 20px;
+	height: 70px;
+	line-height: 45px;
+    text-align: center;
+}
+.d
+{
+	font-weight: normal;
+	font-size: 20px;
+	height: 58px;
+	line-height: 38px;
+    text-align: center;
+}
