@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Encryption</title>
+
+</head>
+<body>
+<hr id="headeHR"/>
+<div id="header">
+<input type="file" id="file" name="file" onchange="Clear()" >
+<input type="button" id="admit" onclick="readFile(file)" value="Отправить" chae>
+<input type="button" id="reset" onclick="reset()" value="Сбросить" hidden>
+</div>
+<hr>
+<div id="Alert"></div>
+<div id="inputTextToSave">
+<p id="IniData"></p>
+<div id="IniDataValue"></div>
+<p id="simpleNumber"></p>
+<div id="simpleNumberValue"></div>
+<p id="CNumber"></p>
+<div id="CNumberValue"></div>
+<div id="Module"></div>
+<div id="EulerFunction"></div>
+<div id="OpenKey"></div>
+<div id="SecretKey"></div>
+<div id="EncryptedData" hidden></div>
+<div id="DecryptedData"></div>
+</div>
+</body>
+<script>
+
+characters = [  ' ', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
+'#', 'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И',
+'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', "Т", 'У', 
+'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ь', 'Ы', 'Ъ', 'Э', 'Ю', 'Я' ];
+function Clear() 
+{
+
+document.getElementById("Alert").hidden  = true;
+}
+function reset() {
+document.getElementById("file").value = "";
+document.getElementById("inputTextToSave").hidden  = true;
+document.getElementById("reset").hidden  = true;
+}
+function arrayRandElement(arr, dop) {
+let rand;
+do {
+	rand = Math.floor(Math.random() * arr.length);
+} while (arr[rand] == dop);
+return arr[rand];
+}
+function rsa(mas, key, n, type) {
+let enc_dec = [];
+let i = 0;
+let index;
+mas.forEach(element => {
+	if (type == 'En') {
+		index = characters.indexOf(element);
+		element = BigInt(index);
+		enc_dec[i++] = BigInt(element ** BigInt(key)) % BigInt(n);
+
+	}
+	else if (type =='De') {
+		index = Number(BigInt(element ** BigInt(key)) % BigInt(n));
+		enc_dec[i++] = characters[index];
+	}
+});
+return enc_dec;
+}
+function isCoprime (a, b) 
+{
+var num;
+while ( b ) {
+	num = a % b;
+	a = b;
+	b = num;
+}
+if (Math.abs(a) == 1) {
+	return true;
+}
+
+return false;
+}
+
+function getE(Fn)
+{
+let z=0;
+let list_SimpleExtend=[];
+nextPrime:
+for (let i = 2; i < Fn; i++) {            // Для всех i...
+for (let j = 2; j < i; j++) {           // проверить, делится ли число..
+if (i % j == 0) continue nextPrime; // не подходит, берём следующее
+}
+list_SimpleExtend[z++] = i;
+}
+for (var i = 0; i < Fn; i++) {
+if (list_SimpleExtend.includes(i)) 
+{
+if (isCoprime(i,Fn)) 
+{
+return i;;
+}
+}
+}
+}
+
+function getD(E,Fn)
+{
+let i =0;
+while (true)
+{
+i++;
+if (i !=E) 
+{
+if (((i*E)%Fn)==1) 
+{
+return i;
+}
+
+}
+}
+}
+function toUpperCase(Array) {
+for (var i = 0; i < Array.length; i++) {
+Array[i]=Array[i].toUpperCase();
+}
+return Array;
+}
+// Чтение текста из файла (массив символов)
+function readFile(input) {
+if (document.getElementById("file").value == "") 
+{
+
+document.getElementById("Alert").hidden  = false;
+document.getElementById("reset").hidden  = true;
+document.getElementById("Alert").innerText  = "Выберите файл..";
+}
+else 
+{
+document.getElementById("reset").hidden  = false;
+document.getElementById("inputTextToSave").hidden  = false;
+}
+let file = input.files[0];
+let reader = new FileReader();
+reader.readAsText(file);
+reader.onload = function() {
+let text = reader.result;
+console.log(text);
+document.getElementById("IniData").innerText = 'Исходные данные: ';
+document.getElementById("IniDataValue").innerHTML = text;
+// Генерация ключей (открытый и закрытый)
+
+
+
+// Вычислить два простых числа
+let list_simple = []; // список простых чисел
+let max = 50;
+let z = 0;
+nextPrime:
+for (let i = 7; i <= max; i++) {            // Для всех i...
+for (let j = 2; j < i; j++) {           // проверить, делится ли число..
+if (i % j == 0) continue nextPrime; // не подходит, берём следующее
+}
+list_simple[z++] = i;
+}
+console.log('Список простых чисел:');
+console.log(list_simple);
+document.getElementById("simpleNumber").innerText = 'Список простых чисел: ';
+document.getElementById("simpleNumberValue").innerHTML = list_simple;
+// Выбрать два простых числа
+let p = arrayRandElement(list_simple);
+let q = arrayRandElement(list_simple,p);
+document.getElementById("CNumberValue").innerHTML = `Простые числа: p = ${p}, q = ${q}`;
+console.log(`Простые числа: p = ${p}, q = ${q}`);
+
+let n = p * q;              // Вычислить модуль — произведение простых чисел
+let fn = (p - 1) * (q - 1); // Вычислить функцию Эйлера
+
+console.log('n',n);
+document.getElementById("Module").innerHTML = `Модуль: ${n}`;
+console.log('fn',fn);
+document.getElementById("EulerFunction").innerHTML = `Функция Эйлера: ${fn}`;
+let e=getE(fn);
+let d=getD(e,fn);
+console.log(`Открытый ключ: {${e},${n}}`);
+console.log(`Закрытый ключ: {${d},${n}}`);
+document.getElementById("OpenKey").innerHTML = `Открытый ключ: {${e},${n}}`;
+document.getElementById("SecretKey").innerHTML = `Закрытый ключ: {<strong>${d},${n}</strong>}`;
+arr = text.split('');
+/*console.log(arr);*/
+toUpperCase(arr);
+/*console.log(arr);*/
+let enc = rsa(arr, e, n,'En');  // Шифрование
+let dec = rsa(enc, d, n, 'De'); // Дешифрование
+dec = dec.join('');
+
+console.log('Шифрованные данные');
+console.log(enc);
+console.log('Дешифрованные данные');
+console.log(dec);
+document.getElementById("EncryptedData").hidden  = false;
+document.getElementById("EncryptedData").innerHTML = `Шифрованные данные: ${enc}`;
+document.getElementById("DecryptedData").innerHTML =  `Расшифрованные данные: ${dec}`;
+};
+
+reader.onerror = function() {
+console.log(reader.error);
+};
+}
+</script>
+</html>

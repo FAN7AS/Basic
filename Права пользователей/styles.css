@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+body
+{
+	background-color: #D7D7D7FF !important;
+	font-size: 20px !important;font-family: 'Lobster' !important;
+	height: 100% !important;
+}
+.InfoBox
+{
+	text-align: center;
+}
+.MiddleForm
+{
+	display: flex;
+	justify-content: center;
+
+}
+.RightCenter
+{
+	text-align: center !important;
+	display: flex;
+	justify-content: center;
+}
+.RightShow
+{
+	text-align: left;
+}
+.logout
+{
+	padding: 0.5em;
+	
+}
+.OutRight
+{
+	
+    vertical-align: bottom;
+    margin-top: 10px;
+    text-align: center;
+}
+.FormRight
+{
+width: 55%;
+margin-left: auto;
+margin-right: auto;
+padding:  0.3em 0 0.5em 0;
+color: white;
+}
+.FormLeft
+{
+	width: 50%;
+margin-left: auto;
+margin-right: auto;
+padding:  0.3em 0 0.3em 0;
+}
+.container
+{
+	margin: 2em 0 2em 0;
+
+}
+
+.Middle
+{
+	text-align: center;
+}
+.row
+{
+	width: 100% !important;
+}
+.special
+{
+	margin: 0 0 0 10px !important;
+}
+input#go:hover
+{
+box-shadow: 0 0 4em white;
+
+outline: none;
+}
+input[type="checkbox"]
+{
+margin: 0 0.5em 0 0.5em;
+height:23px;
+width:23px;
+vertical-align: text-bottom;
+}
+
+input[type="checkbox"]:hover
+{
+margin: 0 0.5em 0 0.5em;
+height:23px;
+width:23px;
+vertical-align: text-bottom;
+box-shadow: 0 0 white, 0em 0 0.2em white;
+}
+input[type="submit"]
+{
+height: 32px;
+font-size: 18px;
+margin: 4px 0 0 10px;
+
+}
+
+input[type="submit"]:hover
+{
+height: 32px;
+font-size: 18px;
+box-shadow: 0 0 white, 0em 0 0.2em white;
+}
+input[type="text"]
+{
+height: 40px;
+width: 200px;
+vertical-align: baseline;
+font-size: 22px;
+ line-height: inherit;
+ text-align: center;
+ outline: none;
+ padding: 0px;
+}
+select
+{
+	margin: 0 0 0 15px !important;
+	 text-align-last: center !important;
+}
+option
+{
+	text-align: center !important;
+}
+label
+{
+	font-family: 'Lobster', cursive;
+	font-size: 18px;
+}
+h4
+{
+	text-align: center;
+}
+b
+{
+	font-size: 23px;
+}
+header
+{
+	background-color: #242630FF;
+	width: 100%;
+	padding: -10px !important;
+		margin: 0px !important;
+}
+footer
+{
+		background-color: #242630FF !important;
+	 position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+}
+hr
+{
+    border: none; /* Убираем границу для браузера Firefox */
+    color: red; /* Цвет линии для остальных браузеров */
+    background-color: red; /* Цвет линии для браузера Firefox и Opera */
+    height: 2px; 
+}
+input::placeholder {
+  
+  font-size: 0.85em;
+  
+}
+a
+{
+	text-decoration: none !important;
+	color: black !important;
+
+
+}
+button
+{
+	outline: none !important;
+	border: none;
+	border-radius: 2px !important;
+	height: 36px !important;
+	width: 90px !important; 
+	line-height: 10px !important; 
+}
